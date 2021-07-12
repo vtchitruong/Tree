@@ -17,26 +17,37 @@ public:
     }
 };
 
+//----------------------------------------------
 class Solution
 {
 public:
-    Node* insert(Node* root, int data) {
-        if(root == NULL) {
+    Node* insert(Node* root, int data)
+    {
+        if(root == NULL)
+        {
             return new Node(data);
-        } else {
+        }
+        else
+        {
             Node* cur;
-            if(data <= root->data) {
+            if (data <= root->data)
+            {
                 cur = insert(root->left, data);
                 root->left = cur;
-            } else {
+            }
+            else
+            {
                 cur = insert(root->right, data);
                 root->right = cur;
             }
 
             return root;
         }
-}
+    }
+
     void preOrder(Node *root);
+    void postOrder(Node *root);
+    void inOrder(Node *root);
 
 }; //End of Solution
 
@@ -49,6 +60,28 @@ void Solution::preOrder(Node *root)
     
     preOrder(root->left);
     preOrder(root->right);
+}
+
+//----------------------------------------------------
+void inOrder(Node *root)
+{
+    if (root == nullptr)
+        return;
+    
+    inOrder(root->left);
+    cout << root->data << " ";
+    inOrder(root->right);
+}
+
+//-------------------------------------------------------
+void postOrder(Node *root)
+{
+    if (root == nullptr)
+        return;
+    
+    postOrder(root->left);
+    postOrder(root->right);
+    cout << root->data << " ";
 }
 
 //------------------------------------------------------------
