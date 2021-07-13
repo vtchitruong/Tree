@@ -50,6 +50,7 @@ public:
     void inOrder(Node *root);
 
     int height(Node* root);
+    void levelOrder(Node * root);
 
 }; //End of Solution
 
@@ -99,6 +100,26 @@ int Solution::height(Node* root)
         rightHeight = height(root->right);
     
     return max(leftHeight, rightHeight) + 1;
+}
+
+//------------------------------------------------------------
+// In level-order traversal, nodes are visited level by level from left to right
+void Solution::levelOrder(Node * root)
+{
+    queue<Node*> q;
+    q.push(root);
+    
+    while (!q.empty())
+    {
+        Node *tmpRoot = q.front();
+        cout << tmpRoot->data << " ";
+        q.pop();
+        
+        if (tmpRoot->left != nullptr)
+            q.push(tmpRoot->left);
+        if (tmpRoot->right != nullptr)
+            q.push(tmpRoot->right);            
+    }   
 }
 
 //------------------------------------------------------------
