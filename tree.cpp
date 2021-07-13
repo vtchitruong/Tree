@@ -51,6 +51,7 @@ public:
 
     int height(Node* root);
     void levelOrder(Node * root);
+    Node *lca(Node *root, int v1,int v2);
 
 }; //End of Solution
 
@@ -123,6 +124,29 @@ void Solution::levelOrder(Node * root)
 }
 
 //------------------------------------------------------------
+// return the lowest common ancestor (LCA) of v1 and v2 in the binary search tree
+Node* Solution::lca(Node *root, int v1,int v2)
+{
+    while (root)
+    {
+        if (root->data < v1 && root->data < v2)
+        {
+            root = root->right;
+        }
+        else 
+            if (root->data > v1 && root->data > v2)    
+            {
+                root = root->left;
+            }
+            else
+            {
+                break;
+            }
+    }
+    return root;
+}
+
+//------------------------------------------------------------
 int main()
 {
   
@@ -139,11 +163,17 @@ int main()
         std::cin >> data;
         root = myTree.insert(root, data);
     }
+
+    int v1, v2;
+  	cin >> v1 >> v2;
   
 	// myTree.preOrder(root);
 
     int height = myTree.height(root);
     cout << "Height of tree: " << height << "\n";
+
+    Node *ans = myTree.lca(root, v1, v2);    
+  	cout << "Lowest common ancestor of " << v1 << " and " << v2 << " is " << ans->data << "\n";    
 
     return 0;
 }
