@@ -49,6 +49,8 @@ public:
     void postOrder(Node *root);
     void inOrder(Node *root);
 
+    int height(Node* root);
+
 }; //End of Solution
 
 //---------------------------------------------------
@@ -63,7 +65,7 @@ void Solution::preOrder(Node *root)
 }
 
 //----------------------------------------------------
-void inOrder(Node *root)
+void Solution::inOrder(Node *root)
 {
     if (root == nullptr)
         return;
@@ -74,7 +76,7 @@ void inOrder(Node *root)
 }
 
 //-------------------------------------------------------
-void postOrder(Node *root)
+void Solution::postOrder(Node *root)
 {
     if (root == nullptr)
         return;
@@ -82,6 +84,21 @@ void postOrder(Node *root)
     postOrder(root->left);
     postOrder(root->right);
     cout << root->data << " ";
+}
+
+//------------------------------------------------------------
+int Solution::height(Node* root)
+{
+    int leftHeight = -1; 
+    int rightHeight = -1;
+    
+    if (root->left)
+        leftHeight = height(root->left);
+        
+    if (root->right)
+        rightHeight = height(root->right);
+    
+    return max(leftHeight, rightHeight) + 1;
 }
 
 //------------------------------------------------------------
@@ -102,6 +119,10 @@ int main()
         root = myTree.insert(root, data);
     }
   
-	myTree.preOrder(root);
+	// myTree.preOrder(root);
+
+    int height = myTree.height(root);
+    cout << "Height of tree: " << height << "\n";
+
     return 0;
 }
